@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
             val tlvData = binding.tlvInput.text.toString()
 
             // Validate input before parsing
-            if (tlvData.isEmpty()) {
+            if (tlvData.trim().isEmpty()) {
                 binding.parsedOutput.text = getString(R.string.please_enter_tlv_data)
             } else {
                 tlvViewModel.parseTLVData(tlvData)
