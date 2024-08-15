@@ -2,4 +2,10 @@
       <dimen name="fab_margin">16dp</dimen>
     <dimen name="dimen_16dp">16dp</dimen>
     <dimen name="text_18sp">18sp</dimen>
+    <dimen name="text_24sp">24sp</dimen>
+    <dimen name="dimen_24dp">24dp</dimen>
+    <dimen name="text_16sp">16sp</dimen>
+    <dimen name="dimen_12dp">12dp</dimen>
+    <dimen name="dimen_40dp">40dp</dimen>
+    <dimen name="text_30sp">30sp</dimen>
 </resources>

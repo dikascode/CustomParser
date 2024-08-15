@@ -1,6 +1,5 @@
 package com.dikascode.emvtlvparser.domain
 
-import android.util.Log
 import com.dikascode.emvtlvparser.model.TLV
 import com.dikascode.emvtlvparser.model.TagRegistry
 
@@ -8,26 +7,26 @@ class ParseTLVUseCase {
 
     fun execute(tlvData: String): Result {
         // Remove all spaces from the input data to ensure consistent parsing
-        val sanitizedTlvData = tlvData.replace(" ", "")
+        val trimmedTlvData = tlvData.replace(" ", "")
         val tlvList = mutableListOf<TLV>()
         var index = 0
 
         try {
-            while (index < sanitizedTlvData.length) {
+            while (index < trimmedTlvData.length) {
                 // Extract tag based on the known list of tags
-                val tag = extractTag(sanitizedTlvData, index)
+                val tag = extractTag(trimmedTlvData, index)
                 if (tag == "Unknown Tag") {
                     return Result.Error("Unknown tag encountered")
                 }
                 index += tag.length
 
                 // Return defined error if there's no more characters after the tag to avoid an exception being thrown
-                if (index + 2 > sanitizedTlvData.length) {
+                if (index + 2 > trimmedTlvData.length) {
                     return Result.Error("Error occurred parsing Tag $tag: Not enough data")
                 }
 
                 // Extract length (next 2 characters after the tag) as a single-byte length
-                val lengthHex = sanitizedTlvData.substring(index, index + 2)
+                val lengthHex = trimmedTlvData.substring(index, index + 2)
                 val lengthInBytes = Integer.parseInt(lengthHex, 16)
                 index += 2
 
@@ -35,13 +34,13 @@ class ParseTLVUseCase {
                 val expectedValueLength = lengthInBytes * 2
                 val valueEndIndex = index + expectedValueLength
 
-                // Confirm there's enough characters left to extract the value
-                if (valueEndIndex > sanitizedTlvData.length) {
+                // Confirm there's enough characters left to extract the value else return defined error
+                if (valueEndIndex > trimmedTlvData.length) {
                     return Result.Error("Error occurred parsing Tag $tag: Not enough data for value field")
                 }
 
                 // Extract value
-                val value = sanitizedTlvData.substring(index, valueEndIndex)
+                val value = trimmedTlvData.substring(index, valueEndIndex)
                 index = valueEndIndex
 
                 tlvList.add(TLV(tag, lengthInBytes, value))
