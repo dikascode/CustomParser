@@ -1,7 +1,7 @@
 package com.dikascode.emvtlvparser.model
 
 object TagRegistry {
-    val emvTags = setOf(
+    private val emvTags = setOf(
         "9F02", "5F2A", "9F1A", "9F36", "82", "4F", "50", "57", "5A", "5F20",
         "5F24", "5F28", "5F34", "06", "41", "42", "43", "44", "45", "46",
         "47", "48", "4D", "51", "52", "53", "56", "58", "59", "5B", "5C",
@@ -47,4 +47,8 @@ object TagRegistry {
         "D1", "D2", "D3", "D5", "D6", "D7", "D8", "D9", "DA", "DB", "DC",
         "DD"
     )
+
+    fun isKnownTagRetrieved(tag: String): Boolean {
+        return emvTags.contains(tag)
+    }
 }

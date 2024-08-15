@@ -1,10 +1,8 @@
 package com.dikascode.emvtlvparser.presentation
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import com.dikascode.emvtlvparser.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -24,14 +22,13 @@ class MainActivity : AppCompatActivity() {
 
         tlvViewModel.tlvList.observe(this) { tlvList ->
             val output = tlvList.joinToString("\n") { tlv ->
-                "TAG: ${tlv.tag} | LENGTH: ${tlv.length} | VALUE: ${tlv.value}"
+                "TAG: ${tlv.tag} | LENGTH: ${tlv.length} byte(s) | VALUE: ${tlv.value}"
             }
             binding.parsedOutput.text = output
         }
 
         tlvViewModel.error.observe(this) { errorMessage ->
             if (errorMessage != null) {
-                // Display the error message
                 binding.parsedOutput.text = errorMessage
             }
         }
