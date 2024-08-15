@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.dikascode.emvtlvparser.domain.ParseTLVUseCase
 import com.dikascode.emvtlvparser.model.TLV
-import com.dikascode.emvtlvparser.model.TagDictionary
+import com.dikascode.emvtlvparser.model.TagRegistry
 
 class TLVViewModel : ViewModel() {
 
@@ -24,9 +24,5 @@ class TLVViewModel : ViewModel() {
         } catch (e: Exception) {
             _error.value = "Error parsing TLV data: ${e.message}"
         }
-    }
-
-    fun getTagDescription(tag: String): String {
-        return TagDictionary.getDescription(tag)
     }
 }

@@ -30,5 +30,7 @@
         android:text=""
         android:layout_marginTop="@dimen/dimen_16dp"
         android:paddingTop="@dimen/dimen_16dp"
+        android:textAllCaps="true"
+        android:textStyle="bold"
         android:layout_gravity="center_horizontal"/>
 </LinearLayout>

@@ -1,7 +1,7 @@
 package com.dikascode.emvtlvparser.domain
 
 import com.dikascode.emvtlvparser.model.TLV
-import com.dikascode.emvtlvparser.model.TagDictionary
+import com.dikascode.emvtlvparser.model.TagRegistry
 
 class ParseTLVUseCase {
 
@@ -36,8 +36,8 @@ class ParseTLVUseCase {
     private fun extractTag(tlvData: String, index: Int): String {
         var potentialTag = ""
         for (i in 2..6 step 2) {
-            potentialTag = tlvData.substring(index, index + i)
-            if (TagDictionary.emvTags.containsKey(potentialTag)) {
+            potentialTag = tlvData.uppercase().substring(index, index + i)
+            if (TagRegistry.emvTags.contains(potentialTag)) {
                 return potentialTag
             }
         }
